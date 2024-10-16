@@ -1,0 +1,104 @@
+<div class="container">
+  <h2>Registration Form</h2>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" />
+      <mat-error
+        *ngIf="
+          registrationForm.get('username')?.invalid &&
+          registrationForm.get('username')?.touched
+        "
+      >
+        <span *ngIf="registrationForm.get('username')?.errors"
+          >Username is required.</span
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          registrationForm.get('email')?.touched
+        "
+      >
+        <span *ngIf="registrationForm.get('email')?.errors"
+          >Email is required.</span
+        >
+        <span *ngIf="registrationForm.get('email')?.errors"
+          >Email must be valid.</span
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" formControlName="password" />
+      <mat-error
+        *ngIf="
+          registrationForm.get('password')?.invalid &&
+          registrationForm.get('password')?.touched
+        "
+      >
+        <span *ngIf="registrationForm.get('password')?.errors"
+          >Password is required.</span
+        >
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Confirm Password</mat-label>
+      <input matInput type="password" formControlName="confirmPassword" />
+      <mat-error
+        *ngIf="
+          registrationForm.errors &&
+          (registrationForm.get('confirmPassword')?.touched ||
+            registrationForm.get('password')?.touched)
+        "
+      >
+        <span>Passwords do not match.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Birthdate</mat-label>
+      <input
+        matInput
+        type="date"
+        formControlName="birthdate"
+        [max]="maxBirthdate"
+      />
+    </mat-form-field>
+
+    <div>
+      <span>Gender:</span>
+      <mat-radio-group formControlName="gender">
+        <mat-radio-button value="male">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="space">
+      <span>Hobbies:-</span>
+      <mat-checkbox formControlName="hobbies" value="sports"
+        >Sports</mat-checkbox
+      >
+      <mat-checkbox formControlName="hobbies" value="music">Music</mat-checkbox>
+      <mat-checkbox formControlName="hobbies" value="reading"
+        >Reading</mat-checkbox
+      >
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="registrationForm.invalid"
+    >
+      Register
+    </button>
+  </form>
+</div>
